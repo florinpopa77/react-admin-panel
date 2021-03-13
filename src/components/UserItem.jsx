@@ -3,6 +3,7 @@ import React from 'react';
 function UserItem(props) {
     const {name, email, isGoldClient, salary, imgLogo} = props;
 
+    
     return (
         <div>
             <img src={imgLogo} alt=""></img>

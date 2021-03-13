@@ -31,6 +31,7 @@ class UserAddForm extends React.Component {
     updateImgLogo(event){
         this.setState({imgLogo: event.target.value})
     }
+    
 
     render() {
         const {name, email, isGoldClient, salary, imgLogo} = this.state;
