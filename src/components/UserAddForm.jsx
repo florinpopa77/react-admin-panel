@@ -6,7 +6,9 @@ class UserAddForm extends React.Component {
         this.state = {
             name: '',
             email: '',
-            isGoldClient: false
+            isGoldClient: false,
+            salary: 0,
+            imgLogo: "https://img.pngio.com/bluecircleclip-artsymbollogographics-4367591-free-png-library-user-logo-png-250_250.png"
         };
     }
 
@@ -22,13 +24,21 @@ class UserAddForm extends React.Component {
         this.setState({isGoldClient: event.target.checked});
     }
 
+    updateSalary(event){
+        this.setState({salary: event.target.value});
+    }
+
+    updateImgLogo(event){
+        this.setState({imgLogo: event.target.value})
+    }
+
     render() {
-        const {name, email, isGoldClient} = this.state;
+        const {name, email, isGoldClient, salary, imgLogo} = this.state;
 
         return (
             <form
                 className="user-add-form"
-                onSubmit={(event) => this.props.submitAddForm(event, name, email, isGoldClient)}
+                onSubmit={(event) => this.props.submitAddForm(event, name, email, isGoldClient, salary, imgLogo)}
             >
                 <h2>Adauga utilizatori:</h2>
                 <label htmlFor="name">Nume:</label>
@@ -42,6 +52,18 @@ class UserAddForm extends React.Component {
                     type="text"
                     name="email"
                     onChange={(event) => this.updateEmail(event)}
+                />
+                <label htmlFor="salary">Salary:</label>
+                <input
+                    type="number"
+                    name="salary"
+                    onChange={(event) => this.updateSalary(event)}
+                />
+                <label htmlFor="img">Image:</label>
+                <input
+                    type="text"
+                    name="img"
+                    onChange={(event) => this.updateImgLogo(event)}
                 />
                 <label htmlFor="is-gold-client">Client GOLD</label>
                 <input

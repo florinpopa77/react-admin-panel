@@ -8,6 +8,7 @@ class App extends React.Component {
     super();
     this.state = {
       background: 'white',
+      textColor: 'black',
       users: []
     };
   }
@@ -19,6 +20,8 @@ class App extends React.Component {
         data = data.filter(user => user.id < 4);
         data.forEach(user => {
           user.isGoldClient = false;
+          user.salary = 1000;
+          user.imgLogo = "https://img.pngio.com/bluecircleclip-artsymbollogographics-4367591-free-png-library-user-logo-png-250_250.png"
         });
         this.setState({users: data});
       })
@@ -26,6 +29,10 @@ class App extends React.Component {
 
   changeColor(event) {
     this.setState({background: event.target.value});
+  }
+
+  changeTextColor(event){
+    this.setState({textColor: event.target.value});
   }
 
   getMaxId(users) {
@@ -40,7 +47,7 @@ class App extends React.Component {
     return maxId;
   }
 
-  submitAddForm(event, name, email, isGoldClient) {
+  submitAddForm(event, name, email, isGoldClient, salary, imgLogo) {
     event.preventDefault();
     this.setState(prevState => {
       return {
@@ -50,7 +57,9 @@ class App extends React.Component {
             id: this.getMaxId(prevState.users) + 1,
             name,
             email,
-            isGoldClient
+            isGoldClient,
+            salary,
+            imgLogo
           }
         ]
       }
@@ -59,11 +68,12 @@ class App extends React.Component {
 
   render() {
     return(
-      <div className="app" style={{background: this.state.background}}>
+      <div className="app" style={{background: this.state.background, color: this.state.textColor}}>
         <h1>Admin panel - Proiectul 1</h1>
-        <UserAddForm submitAddForm={(event, name, email, isGoldClient) => this.submitAddForm(event, name, email, isGoldClient)}/>
+        <UserAddForm submitAddForm={(event, name, email, isGoldClient,salary, imgLogo) => this.submitAddForm(event, name, email, isGoldClient, salary, imgLogo)}/>
         <UserList users={this.state.users}/>
         <input type="color" onChange={(event) => this.changeColor(event)}/>
+        <input type="color" onChange={(event) => this.changeTextColor(event)}/>
       </div>
     );
   }
