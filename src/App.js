@@ -2,6 +2,7 @@ import React from 'react';
 import UserList from './components/UserList';
 import UserAddForm from './components/UserAddForm';
 import './App.css';
+import PostList from './components/PostList';
 
 class App extends React.Component {
   constructor() {
@@ -9,6 +10,7 @@ class App extends React.Component {
     this.state = {
       background: 'white',
       textColor: 'black',
+      displayUsers: true,
       users: []
     };
   }
@@ -65,14 +67,20 @@ class App extends React.Component {
       }
     });
   }
-  
+
+  changeDisplay(setOnOff){
+    this.setState({displayUsers: setOnOff});
+  }
+
 
   render() {
     return(
       <div className="app" style={{background: this.state.background, color: this.state.textColor}}>
         <h1>Admin panel - Proiectul 1</h1>
         <UserAddForm submitAddForm={(event, name, email, isGoldClient,salary, imgLogo) => this.submitAddForm(event, name, email, isGoldClient, salary, imgLogo)}/>
-        <UserList users={this.state.users}/>
+        <button onClick={() => this.changeDisplay(true)}>Afisare Utilizatori</button>
+        <button onClick={() => this.changeDisplay(false)}> Afisare Postari</button>
+        {this.state.displayUsers === true ? <UserList users={this.state.users}/> : <PostList/>}
         <input type="color" onChange={(event) => this.changeColor(event)}/>
         <input type="color" onChange={(event) => this.changeTextColor(event)}/>
       </div>
