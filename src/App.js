@@ -72,6 +72,11 @@ class App extends React.Component {
     this.setState({displayUsers: setOnOff});
   }
 
+  handleDeleteUser(id){
+    let usersFiltered = this.state.users.filter(user => user.id !== id);
+    this.setState({users: usersFiltered});
+  }
+
 
   render() {
     return(
@@ -80,7 +85,12 @@ class App extends React.Component {
         <UserAddForm submitAddForm={(event, name, email, isGoldClient,salary, imgLogo) => this.submitAddForm(event, name, email, isGoldClient, salary, imgLogo)}/>
         <button onClick={() => this.changeDisplay(true)}>Afisare Utilizatori</button>
         <button onClick={() => this.changeDisplay(false)}> Afisare Postari</button>
-        {this.state.displayUsers === true ? <UserList users={this.state.users}/> : <PostList/>}
+        {this.state.displayUsers === true 
+            ? <UserList 
+                users={this.state.users}
+                handleDeleteUser={id => this.handleDeleteUser(id)}
+            /> 
+            : <PostList/>}
         <input type="color" onChange={(event) => this.changeColor(event)}/>
         <input type="color" onChange={(event) => this.changeTextColor(event)}/>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function UserItem(props) {
-    const {name, email, isGoldClient, salary, imgLogo} = props;
+    const {id, name, email, isGoldClient, salary, imgLogo} = props;
 
     
     return (
@@ -14,6 +14,7 @@ function UserItem(props) {
                 ? <h3>Client GOLD</h3>
                 : null
             }
+            <button onClick={() => props.handleDeleteUser(id)}>Delete</button>
         </div>
     );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import UserItem from './UserItem';
 
 function UserList(props) {
-    const { users } = props;
+    const { users, handleDeleteUser } = props;
     
 
     return (
@@ -16,6 +16,7 @@ function UserList(props) {
                     isGoldClient={ user.isGoldClient }
                     salary={user.salary}
                     imgLogo={user.imgLogo}
+                    handleDeleteUser={handleDeleteUser}
                     key={ index }
                 />
             })}
