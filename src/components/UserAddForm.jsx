@@ -54,13 +54,13 @@ class UserAddForm extends React.Component {
                     name="email"
                     onChange={(event) => this.updateEmail(event)}
                 />
-                <label htmlFor="salary">Salary:</label>
+                <label htmlFor="salary">Salariu:</label>
                 <input
                     type="number"
                     name="salary"
                     onChange={(event) => this.updateSalary(event)}
                 />
-                <label htmlFor="img">Image:</label>
+                <label htmlFor="img">Imagine:</label>
                 <input
                     type="text"
                     name="img"
