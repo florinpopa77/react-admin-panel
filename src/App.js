@@ -20,7 +20,7 @@ class App extends React.Component {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(data => {
-        data = data.filter(user => user.id < 4);
+        data = data.filter(user => user.id < 10);
         data.forEach(user => {
           user.isGoldClient = false;
           user.salary = 1000;
@@ -58,8 +58,6 @@ class App extends React.Component {
       return;
     }
 
-    const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-
     if(!validateEmail(email)){
       alert("Email incorect");
       return;    
@@ -94,19 +92,23 @@ class App extends React.Component {
 
   render() {
     return(
-      <div className="app" style={{background: this.state.background, color: this.state.textColor}}>
-        <h1>Admin panel - Proiectul 1</h1>
+      <div className="app p-xl-5 align-middle" style={{background: this.state.background, color: this.state.textColor}}>
+        <h1 className="text-center mb-1">Admin panel - Proiectul 1</h1>
+        
+        <div className="text-center mb-3">
+          <span className="font-weight-bold">Backgroud color: <input className="mr-3" type="color" onChange={(event) => this.changeColor(event)}/></span>
+          <span className="font-weight-bold">Text color: <input type="color" onChange={(event) => this.changeTextColor(event)}/></span>
+        </div>
+        
         <UserAddForm submitAddForm={(event, name, email, isGoldClient,salary, imgLogo) => this.submitAddForm(event, name, email, isGoldClient, salary, imgLogo)}/>
-        <button onClick={() => this.changeDisplay(true)}>Afisare Utilizatori</button>
-        <button onClick={() => this.changeDisplay(false)}> Afisare Postari</button>
+        <button className="btn btn-primary m-2 bg-primary d-inline-block" onClick={() => this.changeDisplay(true)}>Afisare Utilizatori</button>
+        <button className="btn btn-primary m-2 bg-primary d-inline-block" onClick={() => this.changeDisplay(false)}> Afisare Postari</button>
         {this.state.displayUsers === true 
             ? <UserList 
                 users={this.state.users}
                 handleDeleteUser={id => this.handleDeleteUser(id)}
             /> 
             : <PostList/>}
-        <input type="color" onChange={(event) => this.changeColor(event)}/>
-        <input type="color" onChange={(event) => this.changeTextColor(event)}/>
       </div>
     );
   }

@@ -42,39 +42,62 @@ class UserAddForm extends React.Component {
                 onSubmit={(event) => this.props.submitAddForm(event, name, email, isGoldClient, salary, imgLogo)}
             >
                 <h2>Adauga utilizatori:</h2>
-                <label htmlFor="name">Nume:</label>
-                <input
-                    type="text"
-                    name="name"
-                    onChange={(event) => this.updateName(event)}
-                />
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="text"
-                    name="email"
-                    onChange={(event) => this.updateEmail(event)}
-                />
-                <label htmlFor="salary">Salariu:</label>
-                <input
-                    type="number"
-                    name="salary"
-                    onChange={(event) => this.updateSalary(event)}
-                />
-                <label htmlFor="img">Imagine:</label>
-                <input
-                    type="text"
-                    name="img"
-                    onChange={(event) => this.updateImgLogo(event)}
-                />
-                <label htmlFor="is-gold-client">Client GOLD</label>
-                <input
-                    type="checkbox"
-                    name="is-gold-client"
-                    value="true"
-                    onChange={(event) => this.updateIsGoldClient(event)}
-                />
+                <div className="form-group row">
+                    <label htmlFor="name" className="col-sm-1 col-form-label">Nume</label>
+                    <div className="col-sm-10">
+                        <input type="text" 
+                               className="form-control" 
+                               onChange={(event) => this.updateName(event)} 
+                               id="name" 
+                               placeholder="Nume"
+                        />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="email" className="col-sm-1 col-form-label">Email</label>
+                    <div className="col-sm-10">
+                        <input type="text" 
+                               className="form-control" 
+                               onChange={(event) => this.updateEmail(event)} 
+                               id="email" 
+                               placeholder="Email"
+                        />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="salary" className="col-sm-1 col-form-label">Salariu</label>
+                    <div className="col-sm-10">
+                        <input type="number" 
+                               className="form-control" 
+                               onChange={(event) => this.updateSalary(event)} 
+                               id="salary" 
+                               placeholder="Salariu"
+                        />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="img" className="col-sm-1 col-form-label">Imagine</label>
+                    <div className="col-sm-10">
+                        <input type="text" 
+                               className="form-control" 
+                               onChange={(event) => this.updateImgLogo(event)} 
+                               id="img" 
+                               placeholder="Imagine"
+                        />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="is-gold-client" className="col-sm-1 col-form-label">Client GOLD</label>
+                    <div className="col-sm-1">
+                        <input type="checkbox" 
+                               className="form-control" 
+                               onChange={(event) => this.updateIsGoldClient(event)} 
+                               id="is-gold-client" 
+                        />
+                    </div>
+                </div>
 
-                <input type="submit" value="Introdu utilizatorul"/>
+                <input className="btn btn-primary" type="submit" value="Introdu utilizatorul"/>
             </form>
         )
     }

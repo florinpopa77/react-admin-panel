@@ -21,15 +21,17 @@ class PostList extends Component{
         return(
             <div>
                 <h2>Lista postari:</h2>
-                {this.state.posts.map( post => {
-                    return <PostItem
-                        userId = {post.userId}
-                        id = {post.id}
-                        title = {post.title}
-                        body = {post.body}
-                        key = {post.id}
-                    />
-                })}
+                <div className="d-flex flex-row flex-wrap justify-content-between">
+                    {this.state.posts.map( post => {
+                        return <PostItem
+                            userId = {post.userId}
+                            id = {post.id}
+                            title = {post.title}
+                            body = {post.body}
+                            key = {post.id}
+                        />
+                    })}
+                </div>
             </div>
         )
     }
