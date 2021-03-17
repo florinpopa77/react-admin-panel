@@ -6,7 +6,7 @@ export function usersDisplayReducer(state = initialState, action){
     switch (action.type){
         case 'DISPLAY_USERS_POSTS':
             const newState = {
-                ...state,
+                //...state,
                 users: action.payload.users
             }
             return newState;

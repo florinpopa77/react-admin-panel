@@ -1,28 +1,14 @@
 import React, {Component} from 'react';
 import PostItem from './PostItem';
+import { connect } from 'react-redux';
 
-class PostList extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            posts: []
-        }
-    }
+function PostList(props){
 
-    componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(response => response.json())
-            .then(data => this.setState({posts: data}));
-            
-    }
-
-
-    render(){
         return(
             <div>
                 <h2>Lista postari:</h2>
                 <div className="d-flex flex-row flex-wrap justify-content-between">
-                    {this.state.posts.map( post => {
+                    {props.posts.map( post => {
                         return <PostItem
                             userId = {post.userId}
                             id = {post.id}
@@ -34,7 +20,13 @@ class PostList extends Component{
                 </div>
             </div>
         )
+    
+}
+
+function mapStateToProps(state){
+    return {
+        posts: state.posts.data
     }
 }
 
-export default PostList;
+export default connect(mapStateToProps)(PostList);

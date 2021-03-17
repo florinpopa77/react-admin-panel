@@ -6,7 +6,7 @@ export function backgroundReducer(state = initialState, action){
     switch (action.type){
         case 'CHANGE_BACKGROUND':
             const newState = {
-                ...state,
+                //...state,
                 color: action.payload.color
             }
             return newState;

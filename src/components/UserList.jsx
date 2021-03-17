@@ -1,16 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import UserItem from './UserItem';
 
 function UserList(props) {
-    const { users, handleDeleteUser } = props;
+    const { users } = props;
     
-//"col-12 col-md-6 my-3"
-// className="d-flex flex-wrap justify-content-between"
     return (
         <div>
             <h2>Lista utilizatorilor:</h2> 
             <div className="d-flex flex-row flex-wrap justify-content-between">
-                { users.map((user, index) => {
+                {users.map((user, index) => {
                     return <UserItem
                         id={ user.id }
                         name={ user.name }
@@ -18,8 +17,7 @@ function UserList(props) {
                         isGoldClient={ user.isGoldClient }
                         salary={user.salary}
                         imgLogo={user.imgLogo}
-                        handleDeleteUser={handleDeleteUser}
-                        key={ index }
+                        key={ user.id }
                     />
                 })}
             </div>
@@ -27,4 +25,10 @@ function UserList(props) {
     );
 }
 
-export default UserList;
+function mapStateToProps(state) {
+    return {
+        users: state.users.data
+    }
+  }
+
+export default connect(mapStateToProps)(UserList);

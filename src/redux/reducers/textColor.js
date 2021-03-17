@@ -6,7 +6,7 @@ export function textColorReducer(state = initialState, action){
     switch (action.type){
         case 'CHANGE_TEXT_COLOR':
             const newState = {
-                ...state,
+                //...state,
                 color: action.payload.color
             }
             return newState;

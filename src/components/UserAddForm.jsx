@@ -1,5 +1,9 @@
 import React from 'react';
 import './UserAddForm.css';
+import {validateEmail} from '../utils/EmailValidator';
+import { connect } from 'react-redux';
+import { addUser } from '../redux/actions/users';
+
 class UserAddForm extends React.Component {
     constructor(props) {
         super(props);
@@ -31,6 +35,42 @@ class UserAddForm extends React.Component {
     updateImgLogo(event){
         this.setState({imgLogo: event.target.value})
     }
+
+    getMaxId(users) {
+        let maxId = 0;
+    
+        users.forEach(user => {
+          if (user.id > maxId) {
+            maxId = user.id;
+          }
+        });
+    
+        return maxId;
+      }
+
+      submitAddForm(event, name, email, isGoldClient, salary, imgLogo) {
+        event.preventDefault();
+    
+        if(name.length <= 0) {
+          alert("Numele trebuie completat");
+          return;
+        }
+    
+        if(!validateEmail(email)){
+          alert("Email incorect");
+          return;    
+        }
+
+        this.props.addUser({user:               {
+            id: this.getMaxId(this.props.users) + 1,
+            name,
+            email,
+            isGoldClient,
+            salary,
+            imgLogo
+          }
+        });
+      }
     
 
     render() {
@@ -39,7 +79,7 @@ class UserAddForm extends React.Component {
         return (
             <form
                 className="user-add-form"
-                onSubmit={(event) => this.props.submitAddForm(event, name, email, isGoldClient, salary, imgLogo)}
+                onSubmit={(event) => this.submitAddForm(event, name, email, isGoldClient, salary, imgLogo)}
             >
                 <h2>Adauga utilizatori:</h2>
                 <div className="form-group row">
@@ -103,4 +143,16 @@ class UserAddForm extends React.Component {
     }
 }
 
-export default UserAddForm;
+function mapStateToProps(state){
+    return {
+        users: state.users.data
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        addUser: (payload) => dispatch(addUser(payload))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserAddForm);

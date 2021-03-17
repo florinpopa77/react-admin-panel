@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './UserItem.css';
+import { deleteUser } from '../redux/actions/users';
 
 function UserItem(props) {
     const {id, name, email, isGoldClient, salary, imgLogo} = props;
@@ -16,7 +18,7 @@ function UserItem(props) {
                     ? <h3 className="card-title">Client GOLD</h3>
                     : null
                 }
-                <button className="btn btn-primary" onClick={() => props.handleDeleteUser(id)}>Delete</button>
+                <button className="btn btn-primary" onClick={() => props.deleteUser({id: id})}>Delete</button>
             </div>
         </div>        
         
@@ -24,4 +26,10 @@ function UserItem(props) {
     );
 }
 
-export default UserItem;
+function mapDispatchToProps(dispatch){
+    return {
+        deleteUser: (payload) => dispatch(deleteUser(payload))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(UserItem);
